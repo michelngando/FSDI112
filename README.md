@@ -15,3 +15,4 @@
 # Additional notes  
 - All of the subcommands for django are going to be called followed by python3 manage.py (e.g. python3 manage.py runserver, python3 manage.py migrate...)
 - If we want to check the full list, we can run python3 manage.py
+# FSDI113_Blog
