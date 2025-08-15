@@ -13,7 +13,7 @@ class PostListView(ListView):
     #context is a python dictionary that holds the data for the generic view
     #and this context travels to the htmls
     #by default the context name of ListView and DetailView is 
-    context_object_name="posts"
+    context_object_name="posts_list"
 
 class PostDetailView(DetailView):
     template_name="posts/detail.html"
