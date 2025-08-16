@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>About me</h1>
-    <p>Hi! I'm Michel Ngando and I'm learning how to code.</p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+    About Me
+{% endblock %}
+
+{% block content %}
+    <h1>About Me</h1>
+    <p>Hi! I'm MIchel Ngando and I'm learning how to code!</p>
+{% endblock %}

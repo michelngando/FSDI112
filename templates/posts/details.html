@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Post Detail
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="container mt-5">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+
+                    <h1 class="m-5 text-center">Create new posts</h1>
+                    <h5 class="card-subtitle text-muted">{{single_post.subtite}}</h5>
+                </div>
+                <div class="card-body">
+                    {{single_post|safe}}
+                </div>
+                <div class="card-footer d-flex justify-content-between text-muted">
+                    <small>Created on: {{single_post.created_on|date:"F d, Y \a\t H:i A"}}</small>
+                    <small>By: {{single_post.author.username}}</small>
+                </div>
+            </div class=mt-4 d-flex justify-content-between>
+            {% if prev_post %}
+                <a href="{% url 'post_detail' prev_post.id %}" class="btn btn-outline-primary">
+                    <i class="bi bi-arrow-left"></i>{{prev_post.title}}
+                </a>
+            {% endif %}
+            {$ if next_post %}
+            <a href=""></a>
+            <div>
+
+            </div>
+        </div>
+    </div>
+    {% include 'posts/delete.html'%}
+{% endblock %}
