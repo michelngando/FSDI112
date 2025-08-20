@@ -1,0 +1,16 @@
+{% extends 'base.html'}
+
+{% block titke %}
+    Sign up
+{% enblock title %}
+
+{% block content %}
+    <div class="container">
+        <h1>Sign up</h1>
+        <p>Already have an account? Then please <a href="{% url 'account_login' %}">Sign in</a></p>
+         <form method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <input type="submit" value="Sign up" class="btn btn-success d-block mx-auto">
+         </form>
+    </div>

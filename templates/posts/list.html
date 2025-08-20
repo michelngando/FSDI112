@@ -17,16 +17,16 @@
                     <hr>
                     <div class="mb-3">
                         {{item.body|safe}}
-                    </div>                   
+                    </div>
 
                 </div>
                 <div class="card-footer d-flex justify-content-between text-muted">
-                    <small>Created on: {{item.created_on|date: "F d, Y \a\t H:i A"}}</small>
+                    <small>Created on: {{item.created_on|date:"F d, Y \a\t H:i A"}}</small>
                     <small>By: {{item.author.username}}</small>
 
                 </div>
 
             </div>
-{% endblock %}
-
+        {% endfor %}
     </div>
+{% endblock %}

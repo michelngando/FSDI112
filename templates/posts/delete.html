@@ -12,7 +12,10 @@
       <div class="modal-footer">
         <form action="model-footer"></form>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <form action="" method="post" action="{%url 'post_delete' single_post.id %}">
+          {% csrf_token %}
+        </form>
+        <button type="submit" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>

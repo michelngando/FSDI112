@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
 
 {% block title %}
     Post Detail
@@ -10,29 +9,40 @@
         <div class="container mt-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-light">
-
-                    <h1 class="m-5 text-center">Create new posts</h1>
-                    <h5 class="card-subtitle text-muted">{{single_post.subtite}}</h5>
+                    <h1 class="card-title">{{single_post.title}}</h1>
+                    <h5 class="card-subtitle text-muted">{{single_post.subtitle}}</h5>
                 </div>
                 <div class="card-body">
                     {{single_post|safe}}
+                    {% if user.is_authenticated and user == single_post.author %}
+                    <div class="mt-4 d-flex justify-content-end gap-2">
+                        <a href="{% url 'post_edit' single_post.id %}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil-square"></i> Edit
+                        </a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <i class="bi bi-trash-fill"></i> Delete
+                        </button>
+                    </div>
+                    {% endif %}
                 </div>
                 <div class="card-footer d-flex justify-content-between text-muted">
                     <small>Created on: {{single_post.created_on|date:"F d, Y \a\t H:i A"}}</small>
                     <small>By: {{single_post.author.username}}</small>
                 </div>
-            </div class=mt-4 d-flex justify-content-between>
-            {% if prev_post %}
-                <a href="{% url 'post_detail' prev_post.id %}" class="btn btn-outline-primary">
-                    <i class="bi bi-arrow-left"></i>{{prev_post.title}}
-                </a>
-            {% endif %}
-            {$ if next_post %}
-            <a href=""></a>
-            <div>
-
+            </div>
+            <div class="mt-4 d-flex justify-content-between">
+                {% if prev_post %}
+                    <a href="{% url 'post_detail' prev_post.id %}" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left"></i> {{prev_post.title}}
+                    </a>
+                {% endif %}
+                {% if next_post %}
+                    <a href="{% url 'post_detail' next_post.id %}" class="btn btn-outline-primary ms-auto">
+                        {{next_post.title}}     <i class="bi bi-arrow-right"></i> 
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
-    {% include 'posts/delete.html'%}
+{% include 'posts/delete.html' %}
 {% endblock %}

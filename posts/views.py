@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from .models import Post, Status
 from django.urls import reverse_lazy
-from django
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    UserPassesTestMixin
+)
 # Create your views here.
 
 
@@ -42,7 +45,7 @@ class PostCreateView(CreateView):
 
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     template_name="posts/detail.html"
     model= Post
     context_object_name="single_post"
@@ -52,6 +55,12 @@ class PostDetailView(DetailView):
         if post.status.name == "archived":
             if self.request.user.is_authenticated:
                 return True
+        elif post.status.name == "draft":
+            if self.request.user.is_authenticated:
+                return self.request.user == post.author
+            return False
+        else:
+            return True
             
 
 
@@ -68,7 +77,7 @@ class PostDetailView(DetailView):
                                             .filter(status=status)\
                                             .order_by('created_on')\
                                             .first()
-    return context
+        return context
 
 
 class PostUpdateView(UpdateView):
@@ -78,3 +87,9 @@ class PostUpdateView(UpdateView):
    
         #form.instance.author = self.request.user
         #return super().form_valid(form)
+
+class PostDeleteView(UpdateView):
+    template_name = "posts/details.html"
+    model = Post
+    success_url = reverse_lazy("post_list")
+
