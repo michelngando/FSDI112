@@ -1,8 +1,9 @@
 {% extends 'base.html'}
+{% load crispy_forms_tags %}
 
-{% block titke %}
+{% block title %}
     Sign up
-{% enblock title %}
+{% endblock title %}
 
 {% block content %}
     <div class="container">
@@ -14,3 +15,4 @@
             <input type="submit" value="Sign up" class="btn btn-success d-block mx-auto">
          </form>
     </div>
+{% endblock %}
