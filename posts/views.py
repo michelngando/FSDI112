@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
+from django.views.generic import (ListView, DetailView, CreateView, DeleteView, UpdateView)
 from .models import Post, Status
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import (
@@ -32,13 +32,7 @@ class PostCreateView(CreateView):
     model = Post
     fields=['title', 'subtitle', 'body', 'status']
 
-    def form_valid(self, form):
-        print_form = f"""
-        -----------------------------------------
-        {form}
-        -----------------------------------------
-        {form.instance}
-        """
+    def form_valid(self, form):        
         form.instance.author = self.request.user
         return super().form_valid(form)
 
